@@ -1,0 +1,70 @@
+<html><head>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" charset="UTF-8"> 
+<title>校内人员电子通行证</title>
+<link type="text/css" rel="stylesheet" href="./app.css">
+<link type="text/css" rel="stylesheet" href="./style.css">
+<script src="../public/js/jquery-1.11.1.min.js"></script>
+<script src="../public/js/jquery.qrcode.min.js"></script>
+<script>
+
+var t = null;
+t = setTimeout(time,1000);//開始运行
+function appendZero(obj) {
+    if(obj<10) return "0" +""+ obj;
+    else return obj;
+}
+function time()
+{
+   //clearTimeout(t);//清除定时器
+   dt = new Date();
+   var year = dt.getFullYear();    //获取完整的年份(4位,1970-????)
+   var month = dt.getMonth()+1;       //获取当前月份(0-11,0代表1月)
+   var date = dt.getDate();        //获取当前日(1-31)
+   var h=dt.getHours();//获取时
+   var m=dt.getMinutes();//获取分
+   //var m = ("0" + (dt.getMinutes() + 1)).slice(-2);
+   var s=dt.getSeconds();//获取秒
+   //var s = ("0" + (dt.getSeconds() + 1)).slice(-2);
+   document.getElementById("currentTime").innerHTML =  year+"年"+month+"月"+date+"日"+"    "+appendZero(h)+":"+appendZero(m)+":"+appendZero(s);
+   t = setTimeout(time,1000); //设定定时器，循环运行     
+} 
+function getRequest() {  
+	   var url = location.search; // 获取url中"?"符后的字串
+	   var theRequest = new Object();  
+	   if (url.indexOf("?") != -1) {  
+	      var str = url.substr(1);  
+	      strs = str.split("&");  
+	      for(var i = 0; i < strs.length; i ++) {  
+	         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+	      }  
+	   }  
+	   return theRequest;  
+} 
+</script><style type="text/css">._th-container ._th-item{margin-bottom:3px;position:relative;width:0;height:0;cursor:pointer;opacity:.3;background-color:aquamarine;border-radius:100%;text-align:center;line-height:30px;-webkit-transition:all .35s;-o-transition:all .35s;transition:all .35s;right:30px}._th-container ._th-item,._th-container ._th-click-hover,._th_cover-all-show-times ._th_times{-webkit-box-shadow:-3px 4px 12px -5px black;box-shadow:-3px 4px 12px -5px black}._th-container:hover ._th-item._item-x2{margin-left:18px;width:40px;height:40px;line-height:40px}._th-container:hover ._th-item._item-x-2{margin-left:17px;width:38px;height:38px;line-height:38px}._th-container:hover ._th-item._item-xx2{width:36px;height:36px;margin-left:16px;line-height:36px}._th-container:hover ._th-item._item-xx-2{width:32px;height:32px;line-height:32px;margin-left:14px}._th-container:hover ._th-item._item-reset{width:30px;line-height:30px;height:30px;margin-left:10px}._th-click-hover{position:relative;-webkit-transition:all .5s;-o-transition:all .5s;transition:all .5s;height:45px;width:45px;cursor:pointer;opacity:.3;border-radius:100%;background-color:aquamarine;text-align:center;line-height:45px;right:0}._th-container:hover{left:-5px}._th-container{font-size:12px;-webkit-transition:all .5s;-o-transition:all .5s;transition:all .5s;left:-35px;top:20%;position:fixed;-webkit-box-sizing:border-box;box-sizing:border-box;z-index:100000;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}._th-container ._th-item:hover{opacity:.8;background-color:#5fb492;color:aliceblue}._th-container ._th-item:active{opacity:.9;background-color:#1b3a26;color:aliceblue}._th-container:hover ._th-click-hover{opacity:.8}._th-container:hover ._th-item{opacity:.6;right:0}._th-container ._th-click-hover:hover{opacity:.8;background-color:#5fb492;color:aliceblue}._th_cover-all-show-times{position:fixed;top:0;right:0;width:100%;height:100%;z-index:99999;opacity:1;font-weight:900;font-size:30px;color:#4f4f4f;background-color:rgba(0,0,0,0.1)}._th_cover-all-show-times._th_hidden{z-index:-99999;opacity:0;-webkit-transition:1s all;-o-transition:1s all;transition:1s all}._th_cover-all-show-times ._th_times{width:300px;height:300px;border-radius:50%;background-color:rgba(127,255,212,0.51);text-align:center;line-height:300px;position:absolute;top:50%;right:50%;margin-top:-150px;margin-right:-150px}</style></head>
+
+<body style="background-color:white;">
+    <div class="passApp">
+        <div class="successInfo" style="display: block;">
+            <img id="successImg" class="successImg" src="./pass.png">
+            <p id="successMsg" class="successMsg">验证通过</p>
+            <div id="currentTime" style="font-size:30px;color:#00FF00;">2021年2月18日    22:55:26</div>
+            <div><div class="passLabel">姓名：</div><div class="passValue userName">彭良康</div></div>
+            <div><div class="passLabel">健康码：</div><div class="passValue healthStatus">绿码</div></div>
+			<div><div class="passLabel">单位/学院：</div><div class="passValue deptName">信息科学与工程学院</div></div>
+			<div><div class="passLabel">通行区域：</div><div class="passValue campusName">本部</div></div>
+        </div>
+    </div>
+
+<script src="https://ehall.nbu.edu.cn/casp-ioc/track.min.js"></script><script src="https://ehall.nbu.edu.cn/casp-ioc/app_access.js"></script><div><div class="_th-container">
+    <div class="_th-click-hover _item-input">
+        x1.00
+    </div>
+    <div class="_th-item _item-x2">&gt;</div>
+    <div class="_th-item _item-x-2">&lt;</div>
+    <div class="_th-item _item-xx2">&gt;&gt;</div>
+    <div class="_th-item _item-xx-2">&lt;&lt;</div>
+    <div class="_th-item _item-reset">O</div>
+</div>
+<div class="_th_cover-all-show-times _th_hidden">
+    <div class="_th_times">x1.00</div>
+</div></div></body></html>
